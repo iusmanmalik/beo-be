@@ -23,10 +23,10 @@ public class SubmissionService {
 
     public Submission submitForm(FormSubmissionDTO dto, String ipAddress, String userAgent) {
         // Validate dataJson against schemaJson
-        jsonSchemaValidator.validate( dto.getDataJson(), dto.getDataJson());
-
+//        jsonSchemaValidator.validate( dto.getDataJson(), dto.getDataJson());
+        String json = "{ \"id\": 101, \"name\": \"Usman\", \"active\": true, \"roles\": [\"admin\", \"user\"] }";
         Submission submission = Submission.builder()
-                .dataJson(dto.getDataJson())
+                .dataJson(json)
                 .ipAddress(ipAddress)
                 .userAgent(userAgent)
                 .createdAt(Instant.now())
