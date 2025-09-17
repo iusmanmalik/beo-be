@@ -3,6 +3,11 @@ package com.example.dynamicforms.dto;
 import com.example.dynamicforms.entity.AudioVisualEquipment;
 import com.example.dynamicforms.entity.Beverage;
 import com.example.dynamicforms.entity.MenuItem;
+import com.example.dynamicforms.util.AudioDeserializer;
+import com.example.dynamicforms.util.BeverageDeserializer;
+import com.example.dynamicforms.util.MenuDeserializer;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
@@ -24,7 +29,9 @@ public class FormSubmissionDTO {
     private String eventName;
     private Integer guestCount;
     private Instant formDate;
+    @JsonFormat(pattern = "hh:mm a", locale = "en")
     private LocalTime eventStartingTime;
+    @JsonFormat(pattern = "hh:mm a", locale = "en")
     private LocalTime eventEndingTime;
     private String eventPurpose;
     private String eventLocation;
@@ -34,9 +41,13 @@ public class FormSubmissionDTO {
     private String email;
     private String venueRoom;
     private String setupStyle;
+    @JsonFormat(pattern = "hh:mm a", locale = "en")
     private LocalTime servingTime;
+    @JsonDeserialize(using = MenuDeserializer.class)
     private List<MenuItem> menu = new ArrayList<>();
+    @JsonDeserialize(using = BeverageDeserializer.class)
     private List<Beverage> beverages  = new ArrayList<>();
+    @JsonDeserialize(using = AudioDeserializer.class)
     private List<AudioVisualEquipment> audioVisualEquipment = new ArrayList<>();
 
 

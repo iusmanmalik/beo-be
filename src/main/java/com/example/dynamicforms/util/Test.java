@@ -4,7 +4,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.sql.Time;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Locale;
 
 public class Test {
     public static void main(String[] args) {
@@ -17,7 +21,7 @@ public class Test {
 
         try {
             // JSON String (can also be from file, API, etc.)
-            String json = "{ \"id\": 101, \"name\": \"Usman\", \"active\": true, \"roles\": [\"admin\", \"user\"] }";
+            String json = "{ \"id\": 101, \"eventtime\": \"12:00 AM\", \"active\": true, \"roles\": [\"admin\", \"user\"] }";
 
             // Create ObjectMapper
             ObjectMapper mapper = new ObjectMapper();
@@ -27,7 +31,6 @@ public class Test {
 
             // Access fields
             int id = rootNode.get("id").asInt();
-            String name = rootNode.get("name").asText();
             boolean active = rootNode.get("active").asBoolean();
 
             // Access array
@@ -38,7 +41,17 @@ public class Test {
 
             // Print extracted values
             System.out.println("ID: " + id);
-            System.out.println("Name: " + name);
+            String eventTimeStr = rootNode.get("eventtime").asText();
+            System.out.println("Raw eventtime string: " + eventTimeStr);
+
+            // Convert string to LocalTime (handle 12-hour format with AM/PM)
+
+            // Use Locale.ENGLISH so "AM/PM" is recognized
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a", Locale.ENGLISH);
+
+            LocalTime eventTime = LocalTime.parse(eventTimeStr, formatter);
+
+            System.out.println("Parsed LocalTime: " + eventTime);
             System.out.println("Active: " + active);
 
         } catch (Exception e) {
