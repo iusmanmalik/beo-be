@@ -16,6 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class FormSubmissionDTO {
 
     @NotBlank
@@ -39,4 +40,27 @@ public class FormSubmissionDTO {
     private List<AudioVisualEquipment> audioVisualEquipment = new ArrayList<>();
 
 
+    @Override
+    public String toString() {
+        return "FormSubmissionDTO{" +
+                "eventId='" + eventId + '\'' +
+                ", eventName='" + eventName + '\'' +
+                ", guestCount=" + guestCount +
+                ", formDate=" + formDate +
+                ", eventStartingTime=" + eventStartingTime +
+                ", eventEndingTime=" + eventEndingTime +
+                ", eventPurpose='" + eventPurpose + '\'' +
+                ", eventLocation='" + eventLocation + '\'' +
+                ", clientName='" + clientName + '\'' +
+                ", companyName='" + companyName + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", venueRoom='" + venueRoom + '\'' +
+                ", setupStyle='" + setupStyle + '\'' +
+                ", servingTime=" + servingTime +
+                ", menu=" + menu +
+                ", beverages=" + beverages +
+                ", audioVisualEquipment=" + audioVisualEquipment +
+                '}';
+    }
 }
