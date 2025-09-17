@@ -2,7 +2,6 @@ package com.example.dynamicforms.controller;
 
 import com.example.dynamicforms.dto.*;
 import com.example.dynamicforms.entity.Submission;
-import com.example.dynamicforms.service.FormSchemaService;
 import com.example.dynamicforms.service.SubmissionService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -19,7 +18,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @RequiredArgsConstructor
 public class FormSubmissionController {
 
-    private final FormSchemaService formSchemaService;
     private final SubmissionService submissionService;
 
     // Simple in-memory rate limiter map
@@ -60,6 +58,7 @@ public class FormSubmissionController {
         return ResponseEntity.ok(submissionService.getSubmission(id));
     }
 
+//    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/submissions/{id}")
     public ResponseEntity<?> deleteSubmission(@PathVariable UUID id) {
 //        FormSchema schema = formSchemaService.getSchemaBySlug(slug);
